@@ -10,11 +10,23 @@ import { Header } from '../Header/Header';
 
 import styles from './MainLayout.module.scss';
 
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Container from '@material-ui/core/Container';
+
 const Component = ({className, children}) => (
   <div className={clsx(className, styles.root)}>
-    <Header />
-    <h2>MainLayout</h2>
-    {children}
+    <AppBar>
+      <Container>
+        <Toolbar>
+          <Header />
+        </Toolbar>
+      </Container>
+    </AppBar>
+    <Container>
+      <h2>MainLayout</h2>
+      {children}
+    </Container>
   </div>
 );
 
