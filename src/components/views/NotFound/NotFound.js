@@ -8,11 +8,17 @@ import clsx from 'clsx';
 
 import styles from './NotFound.module.scss';
 
+import {Link} from 'react-router-dom';
+import Paper from '@material-ui/core/Paper';
+import Button from '@material-ui/core/Button';
+
 const Component = ({className, children}) => (
-  <div className={clsx(className, styles.root)}>
-    <h2>NotFound</h2>
-    {children}
-  </div>
+  <Paper>
+    <div className={clsx(className, styles.root)}>
+      <h2>NotFound</h2>
+      <Button className={styles.link} component={Link} to={`/`}>Homepage</Button>
+    </div>
+  </Paper>
 );
 
 Component.propTypes = {
