@@ -11,22 +11,51 @@ import styles from './Header.module.scss';
 import {NavLink} from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 
-const Component = ({className, children}) => (
-  <div className={clsx(className, styles.root)}>
-    <h2>Bulletin Board</h2>
-    <nav>
-      <Button component={NavLink} exact to={`/myPosts`} activeClassName='active'>My Posts</Button>
-      <Button component={NavLink} exact to={`/post/add`} activeClassName='active'>Add Post</Button>
-      <Button component={NavLink} exact to={`/`}>Log out</Button>
-      <Button component={NavLink} exact to={`/`}>Log in</Button>
-    </nav>
-  </div>
-);
+class Component extends React.Component {
+  static propTypes = {
+    children: PropTypes.node,
+    className: PropTypes.string,
+  }
 
-Component.propTypes = {
-  children: PropTypes.node,
-  className: PropTypes.string,
-};
+  state = {
+    authorizationStatus: 'not logged',
+  }
+
+  handleChange = event => {
+    this.setState({
+      authorizationStatus: event.target.value,
+    });
+  };
+
+  render() {
+    const {className} = this.props;
+
+    return (
+      <div className={clsx(className, styles.root)}>
+        <h2>Bulletin Board</h2>
+
+        <select value={this.state.authorizationStatus} onChange={this.handleChange}>
+          <option value="logged">logged</option>
+          <option value="not logged">not logged</option>
+          <option value="admin">admin</option>
+        </select>
+
+        {this.state.authorizationStatus !== 'not logged'
+          ?
+          <nav>
+            <Button className={styles.link} component={NavLink} exact to={`/myPosts`} activeClassName='active'>My Posts</Button>
+            <Button className={styles.link} component={NavLink} exact to={`/post/add`} activeClassName='active'>Add Post</Button>
+            <Button className={styles.link} component={NavLink} exact to={`/`}>Log out</Button>
+          </nav>
+          :
+          <nav>
+            <Button className={styles.link} component={NavLink} exact to={`/`}>Log in</Button>
+          </nav>
+        }
+      </div>
+    );
+  }
+}
 
 // const mapStateToProps = state => ({
 //   someProp: reduxSelector(state),
