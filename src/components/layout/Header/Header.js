@@ -8,10 +8,18 @@ import clsx from 'clsx';
 
 import styles from './Header.module.scss';
 
+import {NavLink} from 'react-router-dom';
+import Button from '@material-ui/core/Button';
+
 const Component = ({className, children}) => (
   <div className={clsx(className, styles.root)}>
-    <h2>Header</h2>
-    {children}
+    <h2>Bulletin Board</h2>
+    <nav>
+      <Button component={NavLink} exact to={`/myPosts`} activeClassName='active'>My Posts</Button>
+      <Button component={NavLink} exact to={`/post/add`} activeClassName='active'>Add Post</Button>
+      <Button component={NavLink} exact to={`/`}>Log out</Button>
+      <Button component={NavLink} exact to={`/`}>Log in</Button>
+    </nav>
   </div>
 );
 

@@ -24,6 +24,8 @@ const Component = ({className, children}) => (
       </Container>
     </AppBar>
     <Container>
+      <Toolbar />
+      <Toolbar />
       <h2>MainLayout</h2>
       {children}
     </Container>
