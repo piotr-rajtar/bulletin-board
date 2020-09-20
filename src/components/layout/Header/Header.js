@@ -43,7 +43,8 @@ class Component extends React.Component {
         {this.state.authorizationStatus !== 'not logged'
           ?
           <nav>
-            <Button className={styles.link} component={NavLink} exact to={`/myPosts`} activeClassName='active'>My Posts</Button>
+            <Button className={styles.link} component={NavLink} exact to={`/`} activeClassName='active'>HomePage</Button>
+            <Button className={styles.link} component={NavLink} exact to={`/post/myposts`} activeClassName='active'>My Posts</Button>
             <Button className={styles.link} component={NavLink} exact to={`/post/add`} activeClassName='active'>Add Post</Button>
             <Button className={styles.link} component={NavLink} exact to={`/`}>Log out</Button>
           </nav>
