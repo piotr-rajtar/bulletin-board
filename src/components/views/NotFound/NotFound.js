@@ -13,10 +13,15 @@ import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
 
 const Component = ({className, children}) => (
-  <Paper>
-    <div className={clsx(className, styles.root)}>
-      <h2>NotFound</h2>
-      <Button className={styles.link} component={Link} to={`/`}>Homepage</Button>
+  <Paper className={styles.root}>
+    <div className={clsx(className)}>
+      <h2>Page was not found!</h2>
+      <p>Please go back to the...</p>
+      <Button
+        variant="outlined"
+        color="primary"
+        size="large"
+        className={styles.button} component={Link} to={`/`}>Homepage</Button>
     </div>
   </Paper>
 );
