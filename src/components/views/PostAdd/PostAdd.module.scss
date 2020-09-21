@@ -11,12 +11,12 @@
   justify-content: space-between;
 }
 
-.title, .description, .file{
-  margin: 10px auto;
+.formFieldFullWidth {
+  margin: 10px 0;
 }
 
-.price, .phone, .location {
-  margin: 10px 0;
+.formFieldPartialWidth {
+  @extend .formFieldFullWidth;
   width: 30%;
 }
 

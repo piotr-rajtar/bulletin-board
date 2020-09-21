@@ -28,7 +28,7 @@ const Component = ({className, children}) => (
         }}
         required
         fullWidth
-        className={styles.title}
+        className={styles.formFieldFullWidth}
       />
       <TextField
         id="content"
@@ -40,11 +40,8 @@ const Component = ({className, children}) => (
         }}
         required
         fullWidth
-        className={styles.description}
+        className={styles.formFieldFullWidth}
       />
-
-
-
       <TextField
         id="price"
         label="Price"
@@ -56,28 +53,27 @@ const Component = ({className, children}) => (
         InputProps={{
           startAdornment: <InputAdornment position="start">$</InputAdornment>,
         }}
-        className={styles.price}
+        className={styles.formFieldPartialWidth}
       />
       <TextField
         id="phone"
         label="Phone number"
         variant="outlined"
         type="tel"
-        className={styles.phone}
+        className={styles.formFieldPartialWidth}
       />
       <TextField
         id="location"
         label="Location"
         variant="outlined"
-        className={styles.location}
+        className={styles.formFieldPartialWidth}
       />
-
       <TextField
         id="file"
         variant="outlined"
         type="file"
         fullWidth
-        className={styles.file}
+        className={styles.formFieldFullWidth}
       />
       <Button
         variant="outlined"
@@ -87,13 +83,8 @@ const Component = ({className, children}) => (
       >
         Submit
       </Button>
-
     </form>
   </Paper>
-
-
-
-
 );
 
 Component.propTypes = {
