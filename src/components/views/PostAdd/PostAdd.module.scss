@@ -1,4 +1,25 @@
 @import '../../../styles/settings.scss';
 
-// .root {
-// }
+.root {
+  padding: 20px;
+  text-align: center;
+}
+
+.form {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.title, .description, .file{
+  margin: 10px auto;
+}
+
+.price, .phone, .location {
+  margin: 10px 0;
+  width: 30%;
+}
+
+.button {
+  margin: 10px auto;
+}
