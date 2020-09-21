@@ -12,8 +12,6 @@ import Paper from '@material-ui/core/Paper';
 import TextField from '@material-ui/core/TextField';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import Button from '@material-ui/core/Button';
-import FormControl from '@material-ui/core/FormControl';
-
 
 const Component = ({className, children}) => (
   <Paper className={styles.root}>
