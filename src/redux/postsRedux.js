@@ -2,9 +2,13 @@
 export const getAll = ({posts}) => posts.data;
 
 export const getPostById = ({posts}, postId) => {
-  const postData = posts.data.filter(post => post.id === postId);
 
-  return postData[0];
+  if(posts.data.length > 0) {
+    const postData = posts.data.filter(post => post.id === postId);
+    return postData[0];
+  } else {
+    return {};
+  }
 };
 
 /* action name creator */
