@@ -2,7 +2,7 @@ export const initialState = {
   posts: {
     data: [
       {
-        id: 1,
+        id: '1',
         title: 'Title1',
         content: 'Content1',
         publicationDate: 'Publication date',
@@ -15,7 +15,7 @@ export const initialState = {
         location: 'Location',
       },
       {
-        id: 2,
+        id: '2',
         title: 'Title2',
         content: 'Content2',
         publicationDate: 'Publication date',
@@ -28,7 +28,7 @@ export const initialState = {
         location: 'Location',
       },
       {
-        id: 3,
+        id: '3',
         title: 'Title3',
         content: 'Content3',
         publicationDate: 'Publication date',

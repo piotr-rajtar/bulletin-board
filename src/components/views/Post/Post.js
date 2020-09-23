@@ -26,15 +26,18 @@ class Component extends React.Component {
   static propTypes = {
     children: PropTypes.node,
     className: PropTypes.string,
-    post: PropTypes.array,
+    post: PropTypes.object,
   }
 
   render() {
-    const {className, children, post} = this.props;
+    const { post } = this.props;
 
-    const postData = post[0];
+    return post? this.postTemplate() : this.noPost();
 
-    //console.log(postData);
+  }
+
+  postTemplate() {
+    const {className, post} = this.props;
 
     return(
       <Paper className={clsx(className, styles.root)}>
@@ -43,49 +46,37 @@ class Component extends React.Component {
           className={styles.card}
         >
           <CardHeader
-            title={postData.title}
-            subheader={`Publicated: ${postData.publicationDate}, last updated: ${postData.lastUpdate}`}
+            title={post.title}
+            subheader={`Publicated: ${post.publicationDate}, last updated: ${post.lastUpdate}`}
           />
           <CardMedia
-            image={postData.photo}
+            image={post.photo}
           />
           <CardContent>
             <Typography>
-              {postData.content}
+              {post.content}
             </Typography>
-            {/*<Typography>
-              {postData.price}
-            </Typography>
-            <Typography>
-              {postData.email}
-            </Typography>
-            <Typography>
-              {postData.phone}
-            </Typography>
-            <Typography>
-              {postData.location}
-            </Typography> */}
             <Table className={styles.table}>
               <TableBody>
                 <TableRow>
                   <TableCell>Price</TableCell>
-                  <TableCell align="right">{postData.price}</TableCell>
+                  <TableCell align="right">{post.price}</TableCell>
                 </TableRow>
                 <TableRow>
                   <TableCell>Email</TableCell>
-                  <TableCell align="right">{postData.email}</TableCell>
+                  <TableCell align="right">{post.email}</TableCell>
                 </TableRow>
                 <TableRow>
                   <TableCell>Phone</TableCell>
-                  <TableCell align="right">{postData.phone}</TableCell>
+                  <TableCell align="right">{post.phone}</TableCell>
                 </TableRow>
                 <TableRow>
                   <TableCell>Location</TableCell>
-                  <TableCell align="right">{postData.location}</TableCell>
+                  <TableCell align="right">{post.location}</TableCell>
                 </TableRow>
                 <TableRow>
                   <TableCell>Status</TableCell>
-                  <TableCell align="right">{postData.status}</TableCell>
+                  <TableCell align="right">{post.status}</TableCell>
                 </TableRow>
               </TableBody>
             </Table>
@@ -97,27 +88,50 @@ class Component extends React.Component {
               color="primary"
               className={styles.button}
               component={NavLink}
-              exact to={`/post/${postData.id}/edit`}
+              exact to={`/post/${post.id}/edit`}
             >
                   Edit post
             </Button>
           </CardActions>
         </Card>
-        <p></p>
-        <p></p>
-        {children}
+      </Paper>
+    );
+
+  }
+
+  noPost() {
+    return (
+      <Paper className={styles.root}>
+        <Card
+          variant="outlined"
+          className={styles.card}
+        >
+          <CardContent>
+            <Typography>
+              Oooops, no post!
+            </Typography>
+          </CardContent>
+          <CardActions>
+            <Button
+              variant="outlined"
+              size="small"
+              color="primary"
+              className={styles.button}
+              component={NavLink}
+              exact to={`/`}
+            >
+                  Go back to main page
+            </Button>
+          </CardActions>
+        </Card>
       </Paper>
     );
   }
 }
 
 const mapStateToProps = (state, props) => ({
-  post: getPostById(state, 1),
+  post: getPostById(state, props.match.params.id),
 });
-
-// const mapStateToProps = (state, props) => ({
-//   post: getPostById(state, props.match.params.id),
-// });
 
 const Container = connect(mapStateToProps)(Component);
 

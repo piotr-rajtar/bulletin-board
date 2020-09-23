@@ -4,7 +4,7 @@ export const getAll = ({posts}) => posts.data;
 export const getPostById = ({posts}, postId) => {
   const postData = posts.data.filter(post => post.id === postId);
 
-  return postData;
+  return postData[0];
 };
 
 /* action name creator */
