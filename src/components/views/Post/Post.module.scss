@@ -1,4 +1,15 @@
 @import '../../../styles/settings.scss';
 
-// .root {
-// }
+.root {
+  padding: 20px;
+  text-align: center;
+}
+
+.button {
+  margin: 10px auto;
+}
+
+.table {
+  margin: 10px auto;
+  width: 30%;
+}
