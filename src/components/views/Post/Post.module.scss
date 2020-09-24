@@ -6,15 +6,10 @@
 }
 
 .button {
-  margin: 10px auto;
+  margin: $universal-margin;
 }
 
-.table {
-  margin: 10px auto;
-  width: 30%;
-}
-
-.photo {
-  margin: 10px auto;
+.table, .photo {
+  margin: $universal-margin;
   width: 30%;
 }
