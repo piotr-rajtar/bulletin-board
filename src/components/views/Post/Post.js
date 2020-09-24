@@ -11,7 +11,6 @@ import styles from './Post.module.scss';
 import Paper from '@material-ui/core/Paper';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
-import CardMedia from '@material-ui/core/CardMedia';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
@@ -33,7 +32,6 @@ class Component extends React.Component {
     const { post } = this.props;
 
     return post? this.postTemplate() : this.noPost();
-
   }
 
   postTemplate() {
@@ -49,10 +47,8 @@ class Component extends React.Component {
             title={post.title}
             subheader={`Publicated: ${post.publicationDate}, last updated: ${post.lastUpdate}`}
           />
-          <CardMedia
-            image={post.photo}
-          />
           <CardContent>
+            <img className={styles.photo} src={post.photo} alt="User photography" />
             <Typography>
               {post.content}
             </Typography>

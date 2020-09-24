@@ -9,7 +9,7 @@ export const initialState = {
         lastUpdate: 'Last update date',
         email: 'Email',
         status: 'Status',
-        photo: 'Photo',
+        photo: 'https://images.pexels.com/photos/275637/pexels-photo-275637.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
         price: 999,
         phone: 123456789,
         location: 'Location',
