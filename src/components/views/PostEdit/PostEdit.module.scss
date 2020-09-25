@@ -1,4 +1,26 @@
 @import '../../../styles/settings.scss';
 
-// .root {
-// }
+.root {
+  padding: 20px;
+  text-align: center;
+}
+
+.form {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.formFieldFullWidth {
+  margin: 10px 0;
+}
+
+.formFieldPartialWidth {
+  @extend .formFieldFullWidth;
+  width: 30%;
+}
+
+.button {
+  margin: $universal-margin;
+}
+
