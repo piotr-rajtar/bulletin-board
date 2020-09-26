@@ -1,14 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import clsx from 'clsx';
-
 // import { connect } from 'react-redux';
 // import { reduxSelector, reduxActionCreator } from '../../../redux/exampleRedux.js';
 
 import styles from './Header.module.scss';
 
-import {NavLink} from 'react-router-dom';
+import {NavLink, Link} from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 
 class Component extends React.Component {
@@ -28,11 +26,11 @@ class Component extends React.Component {
   };
 
   render() {
-    const {className} = this.props;
+    const {} = this.props;
 
     return (
-      <div className={clsx(className, styles.root)}>
-        <h2>Bulletin Board</h2>
+      <header className={styles.root}>
+        <h2 className={styles.title}><Link to={'/'} className={styles.link_title}>Bulletin Board</Link></h2>
 
         <select value={this.state.authorizationStatus} onChange={this.handleChange}>
           <option value="logged">logged</option>
@@ -53,7 +51,7 @@ class Component extends React.Component {
             <Button className={styles.link} component={NavLink} exact to={`/`}>Log in</Button>
           </nav>
         }
-      </div>
+      </header>
     );
   }
 }
