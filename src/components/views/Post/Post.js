@@ -80,13 +80,23 @@ class Component extends React.Component {
           <CardActions>
             <Button
               variant="outlined"
-              size="small"
+              size="large"
               color="primary"
               className={styles.button}
               component={NavLink}
               exact to={`/post/${post.id}/edit`}
             >
                   Edit post
+            </Button>
+            <Button
+              variant="outlined"
+              color="primary"
+              size="large"
+              className={styles.button}
+              component={NavLink}
+              exact to={`/`}
+            >
+              Go back to mainpage
             </Button>
           </CardActions>
         </Card>
