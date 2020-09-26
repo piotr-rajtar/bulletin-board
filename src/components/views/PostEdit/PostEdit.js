@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import { connect } from 'react-redux';
 import { getPostById, updatePost } from '../../../redux/postsRedux.js';
-// import { reduxSelector, reduxActionCreator } from '../../../redux/exampleRedux.js';
+import { createDate } from '../../../utils';
 
 import styles from './PostEdit.module.scss';
 
@@ -15,6 +15,11 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
 import Typography from '@material-ui/core/Typography';
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
+
+
+import ImageUploader from 'react-images-upload';
 
 import {NavLink} from 'react-router-dom';
 
@@ -40,17 +45,33 @@ class Component extends React.Component {
   }
 
   static propTypes = {
-    children: PropTypes.node,
-    className: PropTypes.string,
     post: PropTypes.object,
     updatePost: PropTypes.func,
   }
 
-  // setPhoto = (files) => {
-  //   const { postData } = this.state;
+  setPhoto = (files) => {
+    const { postData } = this.state;
 
-  //   if(files) this.setState({ data: {...data, photo: files[0] }});
-  // }
+    if(files) this.setState({
+      postData: {
+        ...postData,
+        photo: files[0]
+      }
+    });
+  }
+
+  changeUpdateDateAndStatus = () => {
+    const { postData } = this.state;
+    const date = createDate();
+
+    this.setState({
+      postData: {
+        ...postData,
+        lastUpdate: date,
+        status: 'published',
+      },
+    });
+  }
 
   handleChange = (event) => {
     const { postData } = this.state;
@@ -59,7 +80,18 @@ class Component extends React.Component {
     this.setState({
       postData: {...postData, [id]: value },
     });
+  }
 
+  handleSelectChange = (event) => {
+    const { postData } = this.state;
+    const { value } = event.target;
+
+    this.setState({
+      postData: {
+        ...postData,
+        status: value
+      },
+    });
   }
 
   submitForm = (event) => {
@@ -69,7 +101,6 @@ class Component extends React.Component {
 
     updatePost(postData);
   }
-
 
   render() {
     const { post } = this.props;
@@ -146,11 +177,33 @@ class Component extends React.Component {
             value={postData.location}
           />
           <TextField
-            id="file"
+            id="email"
+            label="Email"
             variant="outlined"
-            type="file"
+            type="email"
+            required
             fullWidth
             className={styles.formFieldFullWidth}
+            onChange={this.handleChange}
+            value={postData.email}
+          />
+          <Select
+            id="status"
+            label="Status"
+            value={postData.status}
+            onChange={this.handleSelectChange}
+          >
+            <MenuItem value='active'>Active</MenuItem>
+            <MenuItem value='closed'>Closed</MenuItem>
+          </Select>
+          <ImageUploader
+            withIcon={true}
+            buttonText='Choose image'
+            imgExtension={['.jpg', '.gif', '.png', '.gif']}
+            maxFileSize={5242880}
+            withPreview={true}
+            onChange={this.setPhoto}
+            singleImage={true}
           />
           <Button
             variant="outlined"
@@ -158,6 +211,7 @@ class Component extends React.Component {
             size="large"
             className={styles.button}
             type="submit"
+            onClick={this.changeUpdateDateAndStatus}
           >
             Edit
           </Button>
