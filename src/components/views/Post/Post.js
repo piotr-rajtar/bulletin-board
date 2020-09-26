@@ -49,9 +49,9 @@ class Component extends React.Component {
           />
           <CardContent>
             <img className={styles.photo} src={post.photo} alt="User photography" />
-            <Typography>
-              {post.content}
-            </Typography>
+            <div className={styles.content_wrapper}>
+              <p className={styles.content}>{post.content}</p>
+            </div>
             <Table className={styles.table}>
               <TableBody>
                 <TableRow>
