@@ -52,6 +52,17 @@ class Component extends React.Component {
                 </CardActions>
               </Card>
             ))}
+
+            <Button
+              variant="outlined"
+              color="primary"
+              size="large"
+              className={styles.button}
+              component={NavLink}
+              exact to={`/post/add`}
+            >
+              Add Post
+            </Button>
           </div>
           {children}
         </div>
