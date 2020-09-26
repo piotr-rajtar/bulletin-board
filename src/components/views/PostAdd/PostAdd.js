@@ -14,6 +14,8 @@ import Button from '@material-ui/core/Button';
 
 import ImageUploader from 'react-images-upload';
 
+import {NavLink} from 'react-router-dom';
+
 import { v4 as uuidv4 } from 'uuid';
 
 class Component extends React.Component {
@@ -190,6 +192,16 @@ class Component extends React.Component {
           >
             Submit
           </Button>
+          <Button
+              variant="outlined"
+              color="primary"
+              size="large"
+              className={styles.button}
+              component={NavLink}
+              exact to={`/`}
+            >
+              Go back to mainpage
+            </Button>
         </form>
       </Paper>
     );
