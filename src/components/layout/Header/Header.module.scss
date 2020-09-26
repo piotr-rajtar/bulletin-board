@@ -1,7 +1,6 @@
 @import '../../../styles/settings.scss';
 
 .root {
-  padding: 20px;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -9,25 +8,22 @@
   text-align: center;
 }
 
-.title {
+.header_item {
   flex: 100%;
+}
+
+.title {
+  @extend .header_item;
   margin: $universal-margin;
 }
 .link {
   color: #ffffff;
-}
-
-.link_title {
-  color: #ffffff;
   text-decoration: none;
 }
 
-select {
-  flex: 100%;
-}
-
 nav {
-  flex: 100%;
+  @extend .header_item;
+  padding: 5px;
 }
 
 

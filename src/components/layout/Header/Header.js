@@ -30,9 +30,9 @@ class Component extends React.Component {
 
     return (
       <header className={styles.root}>
-        <h2 className={styles.title}><Link to={'/'} className={styles.link_title}>Bulletin Board</Link></h2>
+        <h2 className={styles.title}><Link to={'/'} className={styles.link}>Bulletin Board</Link></h2>
 
-        <select value={this.state.authorizationStatus} onChange={this.handleChange}>
+        <select value={this.state.authorizationStatus} onChange={this.handleChange} className={styles.header_item}>
           <option value="logged">logged</option>
           <option value="not logged">not logged</option>
           <option value="admin">admin</option>
@@ -48,7 +48,7 @@ class Component extends React.Component {
           </nav>
           :
           <nav>
-            <Button className={styles.link} component={NavLink} exact to={`/`}>Log in</Button>
+            <Button><a href="https://google.com" className={styles.link}>Log in</a></Button>
           </nav>
         }
       </header>
