@@ -64,7 +64,7 @@ class Component extends React.Component {
         id: id,
         publicationDate: date,
         lastUpdate: date,
-        status: 'published',
+        status: 'active',
       },
     });
   }
