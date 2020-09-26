@@ -224,6 +224,16 @@ class Component extends React.Component {
           >
             Edit
           </Button>
+          <Button
+            variant="outlined"
+            color="primary"
+            size="large"
+            className={styles.button}
+            component={NavLink}
+            exact to={`/post/${postData.id}`}
+          >
+            Go back to the post
+          </Button>
         </form>
       </Paper>
     );
