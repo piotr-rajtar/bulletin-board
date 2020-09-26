@@ -28,7 +28,7 @@ class Component extends React.Component {
     return(
       <Paper className={clsx(className, styles.root)}>
         <div >
-          <h2>Cards</h2>
+          <h2>BULLETIN BOARD!!</h2>
           <p>Please, find something you can bullet-in</p>
           <div className={styles.cardContainer}>
             {posts.map(post => (
