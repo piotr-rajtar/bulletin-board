@@ -78,15 +78,13 @@ class Component extends React.Component {
     });
   }
 
-  setPhoto = (file) => {
+  setPhoto = (files) => {
     const { postData } = this.state;
 
-    console.log(file);
-
-    if(file) this.setState({
+    if(files) this.setState({
       postData: {
         ...postData,
-        photo: file[0]
+        photo: files[0]
       }
     });
   }
@@ -103,6 +101,9 @@ class Component extends React.Component {
 
     if(!error) {
       addPost(postData);
+      alert('Post added successfully')
+    } else {
+      alert(error);
     }
   }
 
