@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import { connect } from 'react-redux';
 import { addPost } from '../../../redux/postsRedux';
+import { createDate } from '../../../utils';
 
 import styles from './PostAdd.module.scss';
 
@@ -52,19 +53,9 @@ class Component extends React.Component {
     });
   }
 
-  createDate = () => {
-    const date = new Date();
-    const day = date.getDate();
-    const month = date.getMonth();
-    const year = date.getFullYear();
-
-    const formatedDate = `${day}.${month.toString().padStart(2, '0')}.${year}`;
-    return formatedDate;
-  }
-
   fillNoVisibleParameters = () => {
     const { postData } = this.state;
-    const date = this.createDate();
+    const date = createDate();
     const id = uuidv4();
 
     this.setState({
