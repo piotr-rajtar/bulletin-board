@@ -1,4 +1,23 @@
 @import '../../../styles/settings.scss';
 
-// .root {
-// }
+.root {
+  padding: 20px;
+  text-align: center;
+}
+
+.cardContainer {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.card {
+  margin: 10px 0;
+  width: 30%;
+}
+
+.button {
+  margin: $universal-margin;
+  flex: 100%;
+}
