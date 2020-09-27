@@ -22,6 +22,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import ImageUploader from 'react-images-upload';
 
 import {NavLink} from 'react-router-dom';
+import {NotFound} from '../NotFound/NotFound';
 
 class Component extends React.Component {
 
@@ -41,6 +42,9 @@ class Component extends React.Component {
     },
     loading: {
       error: false,
+    },
+    user: {
+      permission: 'user',
     },
   }
 
@@ -113,8 +117,13 @@ class Component extends React.Component {
 
   render() {
     const { post } = this.props;
+    const { user } = this.state;
 
-    return post? this.postEdit() : this.noPost();
+    if(user.permission === 'user' || user.permission === 'admin') {
+      return post? this.postEdit() : this.noPost();
+    } else {
+      return this.notPermittedUser();
+    }
   }
 
   postEdit() {
@@ -265,6 +274,12 @@ class Component extends React.Component {
           </CardActions>
         </Card>
       </Paper>
+    );
+  }
+
+  notPermittedUser() {
+    return (
+      <NotFound />
     );
   }
 }
