@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import clsx from 'clsx';
 
 import { connect } from 'react-redux';
-import { getAll } from '../../../redux/postsRedux';
+import { getAllPosts } from '../../../redux/postsRedux';
 
 import styles from './Homepage.module.scss';
 
@@ -83,7 +83,7 @@ class Component extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  posts: getAll(state),
+  posts: getAllPosts(state),
 });
 
 // const mapDispatchToProps = dispatch => ({

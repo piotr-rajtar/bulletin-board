@@ -1,5 +1,5 @@
 /* selectors */
-export const getAll = ({posts}) => posts.data;
+export const getAllPosts = ({posts}) => posts.data;
 
 export const getPostById = ({posts}, postId) => {
 
