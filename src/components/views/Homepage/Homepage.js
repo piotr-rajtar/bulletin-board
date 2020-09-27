@@ -34,36 +34,27 @@ class Component extends React.Component {
           <p>Please, find something you can bullet-in</p>
           <div className={styles.cardContainer}>
 
-            {posts
-              .sort(
-                (date1,date2) => {
-                  const dateA = new Date(date1.lastUpdate);
-                  const dateB = new Date(date2.lastUpdate);
-
-                  return dateB.getTime() - dateA.getTime();
-                }
-              )
-              .map(post => (
-                <Card
-                  variant="outlined"
-                  key={post.id}
-                  className={styles.card}
-                >
-                  <CardContent>{post.title}</CardContent>
-                  <CardActions>
-                    <Button
-                      variant="outlined"
-                      size="small"
-                      color="primary"
-                      className={styles.button}
-                      component={NavLink}
-                      exact to={`/post/${post.id}`}
-                    >
+            {posts.map(post => (
+              <Card
+                variant="outlined"
+                key={post.id}
+                className={styles.card}
+              >
+                <CardContent>{post.title}</CardContent>
+                <CardActions>
+                  <Button
+                    variant="outlined"
+                    size="small"
+                    color="primary"
+                    className={styles.button}
+                    component={NavLink}
+                    exact to={`/post/${post.id}`}
+                  >
                     Find out more
-                    </Button>
-                  </CardActions>
-                </Card>
-              ))}
+                  </Button>
+                </CardActions>
+              </Card>
+            ))}
 
             {permission === 'not authorized'
               ? ''

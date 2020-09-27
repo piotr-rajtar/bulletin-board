@@ -1,5 +1,12 @@
 /* selectors */
-export const getAllPosts = ({posts}) => posts.data;
+export const getAllPosts = ({posts}) => (
+  posts.data.sort((date1,date2) => {
+    const dateA = new Date(date1.lastUpdate);
+    const dateB = new Date(date2.lastUpdate);
+
+    return dateB.getTime() - dateA.getTime();
+  })
+);
 
 export const getPostById = ({posts}, postId) => {
 
