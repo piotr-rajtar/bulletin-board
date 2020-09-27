@@ -55,8 +55,8 @@ class Component extends React.Component {
     if(files) this.setState({
       postData: {
         ...postData,
-        photo: files[0]
-      }
+        photo: files[0],
+      },
     });
   }
 
@@ -88,7 +88,7 @@ class Component extends React.Component {
     this.setState({
       postData: {
         ...postData,
-        status: value
+        status: value,
       },
     });
   }
@@ -101,11 +101,11 @@ class Component extends React.Component {
     let error = null;
 
     if (!postData.title.length || !postData.content.length || !postData.email.length) error ='You cannot leave title, content and email firlds empty';
-    else if(postData.title.length < 10 || postData.content.length < 20) error ="Too short, title cannot has less than 10 character, content less than 20";
+    else if(postData.title.length < 10 || postData.content.length < 20) error ='Too short, title cannot has less than 10 character, content less than 20';
 
     if(!error) {
       updatePost(postData);
-      alert('Post edited successfully')
+      alert('Post edited successfully');
     } else {
       alert(error);
     }
