@@ -13,6 +13,7 @@ export const initialState = {
         price: 999,
         phone: 123456789,
         location: 'Location',
+        userId: '2',
       },
       {
         id: '2',
@@ -26,6 +27,7 @@ export const initialState = {
         price: 666,
         phone: 987654321,
         location: 'Location',
+        userId: '3',
       },
       {
         id: '3',
@@ -39,6 +41,7 @@ export const initialState = {
         price: 333,
         phone: 456123789,
         location: 'Location',
+        userId: '2',
       },
     ],
     loading: {
@@ -54,11 +57,16 @@ export const initialState = {
     },
     {
       id: '2',
-      name: 'user',
+      name: 'user1',
       permission: 'user',
     },
     {
       id: '3',
+      name: 'user2',
+      permission: 'user',
+    },
+    {
+      id: '4',
       name: 'not logged user',
       permission: 'not authorized',
     },

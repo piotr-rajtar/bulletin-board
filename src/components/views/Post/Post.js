@@ -22,10 +22,14 @@ import TableRow from '@material-ui/core/TableRow';
 import {NavLink} from 'react-router-dom';
 
 class Component extends React.Component {
+
   static propTypes = {
-    children: PropTypes.node,
-    className: PropTypes.string,
     post: PropTypes.object,
+  }
+
+  state = {
+    id: '2',
+    permission: 'user',
   }
 
   render() {
@@ -35,10 +39,10 @@ class Component extends React.Component {
   }
 
   postTemplate() {
-    const {className, post} = this.props;
+    const {post} = this.props;
 
     return(
-      <Paper className={clsx(className, styles.root)}>
+      <Paper className={styles.root}>
         <Card
           variant="outlined"
           className={styles.card}
@@ -78,16 +82,12 @@ class Component extends React.Component {
             </Table>
           </CardContent>
           <CardActions>
-            <Button
-              variant="outlined"
-              size="large"
-              color="primary"
-              className={styles.button}
-              component={NavLink}
-              exact to={`/post/${post.id}/edit`}
-            >
-                  Edit post
-            </Button>
+
+            {this.isPermitted()
+              ? this.showButton()
+              : ''
+            }
+
             <Button
               variant="outlined"
               color="primary"
@@ -102,7 +102,34 @@ class Component extends React.Component {
         </Card>
       </Paper>
     );
+  }
 
+  isPermitted() {
+    const { post } = this.props;
+    const {permission, id} = this.state;
+
+    if(post.userId === id || permission === 'admin') {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  showButton() {
+    const { post } = this.props;
+
+    return(
+      <Button
+        variant="outlined"
+        size="large"
+        color="primary"
+        className={styles.button}
+        component={NavLink}
+        exact to={`/post/${post.id}/edit`}
+      >
+        Edit post
+      </Button>
+    );
   }
 
   noPost() {
