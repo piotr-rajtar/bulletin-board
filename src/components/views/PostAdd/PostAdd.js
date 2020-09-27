@@ -32,7 +32,7 @@ class Component extends React.Component {
       photo: null,
       price: '',
       phone: '',
-      location: ''
+      location: '',
     },
     loading: {
       error: false,
@@ -50,7 +50,7 @@ class Component extends React.Component {
     this.setState({
       postData: {
         ...postData,
-        [id]: value
+        [id]: value,
       },
     });
   }
@@ -77,8 +77,8 @@ class Component extends React.Component {
     if(files) this.setState({
       postData: {
         ...postData,
-        photo: files[0]
-      }
+        photo: files[0],
+      },
     });
   }
 
@@ -90,11 +90,11 @@ class Component extends React.Component {
     let error = null;
 
     if (!postData.title.length || !postData.content.length || !postData.email.length) error ='You cannot leave title, content and email firlds empty';
-    else if(postData.title.length < 10 || postData.content.length < 20) error ="Too short, title cannot has less than 10 character, content less than 20";
+    else if(postData.title.length < 10 || postData.content.length < 20) error ='Too short, title cannot has less than 10 character, content less than 20';
 
     if(!error) {
       addPost(postData);
-      alert('Post added successfully')
+      alert('Post added successfully');
     } else {
       alert(error);
     }
@@ -193,15 +193,15 @@ class Component extends React.Component {
             Submit
           </Button>
           <Button
-              variant="outlined"
-              color="primary"
-              size="large"
-              className={styles.button}
-              component={NavLink}
-              exact to={`/`}
-            >
+            variant="outlined"
+            color="primary"
+            size="large"
+            className={styles.button}
+            component={NavLink}
+            exact to={`/`}
+          >
               Go back to mainpage
-            </Button>
+          </Button>
         </form>
       </Paper>
     );
@@ -214,8 +214,8 @@ class Component extends React.Component {
 // });
 
 const mapDispatchToProps = dispatch => ({
-   addPost: data => dispatch(addPost(data)),
- });
+  addPost: data => dispatch(addPost(data)),
+});
 
 const Container = connect(null, mapDispatchToProps)(Component);
 
