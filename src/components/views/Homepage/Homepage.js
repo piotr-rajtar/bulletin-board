@@ -1,8 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import clsx from 'clsx';
-
 import { connect } from 'react-redux';
 import { getAllPosts } from '../../../redux/postsRedux';
 
@@ -18,16 +16,19 @@ import {NavLink} from 'react-router-dom';
 class Component extends React.Component {
 
   static propTypes = {
-    children: PropTypes.node,
-    className: PropTypes.string,
     posts: PropTypes.array,
   }
 
+  state = {
+    permission: 'user',
+  }
+
   render() {
-    const {className, children, posts} = this.props;
+    const {posts} = this.props;
+    const {permission} = this.state;
 
     return(
-      <Paper className={clsx(className, styles.root)}>
+      <Paper className={styles.root}>
         <div >
           <h2>BULLETIN BOARD!!</h2>
           <p>Please, find something you can bullet-in</p>
@@ -64,20 +65,29 @@ class Component extends React.Component {
                 </Card>
               ))}
 
-            <Button
-              variant="outlined"
-              color="primary"
-              size="large"
-              className={styles.button}
-              component={NavLink}
-              exact to={`/post/add`}
-            >
-              Add Post
-            </Button>
+            {permission === 'not authorized'
+              ? ''
+              : this.showButton()
+            }
+
           </div>
-          {children}
         </div>
       </Paper>
+    );
+  }
+
+  showButton() {
+    return (
+      <Button
+        variant="outlined"
+        color="primary"
+        size="large"
+        className={styles.button}
+        component={NavLink}
+        exact to={`/post/add`}
+      >
+        Add Post
+      </Button>
     );
   }
 }
