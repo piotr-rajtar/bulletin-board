@@ -46,4 +46,21 @@ export const initialState = {
       error: false,
     },
   },
+  users: [
+    {
+      id: '1',
+      name: 'admin',
+      permission: 'admin',
+    },
+    {
+      id: '2',
+      name: 'user',
+      permission: 'user',
+    },
+    {
+      id: '3',
+      name: 'not logged user',
+      permission: 'not authorized',
+    },
+  ],
 };
