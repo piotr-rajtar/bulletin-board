@@ -27,7 +27,6 @@ class Component extends React.Component {
 
   render() {
     const {posts} = this.props;
-    console.log(this.props);
 
     return(
       <Paper className={styles.root}>
