@@ -62,7 +62,7 @@ class Component extends React.Component {
                     </Button>
                   </CardActions>
                 </Card>
-            ))}
+              ))}
 
             <Button
               variant="outlined"
