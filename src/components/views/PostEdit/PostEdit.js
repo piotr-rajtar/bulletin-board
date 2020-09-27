@@ -44,6 +44,7 @@ class Component extends React.Component {
       error: false,
     },
     user: {
+      id: '2',
       permission: 'user',
     },
   }
@@ -119,7 +120,7 @@ class Component extends React.Component {
     const { post } = this.props;
     const { user } = this.state;
 
-    if(user.permission === 'user' || user.permission === 'admin') {
+    if(post.userId === user.id || user.permission === 'admin') {
       return post? this.postEdit() : this.noPost();
     } else {
       return this.notPermittedUser();
