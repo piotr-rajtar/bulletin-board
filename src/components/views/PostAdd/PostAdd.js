@@ -15,6 +15,7 @@ import Button from '@material-ui/core/Button';
 import ImageUploader from 'react-images-upload';
 
 import {NavLink} from 'react-router-dom';
+import {NotFound} from '../NotFound/NotFound';
 
 import { v4 as uuidv4 } from 'uuid';
 
@@ -36,6 +37,9 @@ class Component extends React.Component {
     },
     loading: {
       error: false,
+    },
+    user: {
+      permission: '',
     },
   }
 
@@ -101,7 +105,16 @@ class Component extends React.Component {
   }
 
   render() {
+    const { user } = this.state;
 
+    if(user.permission === 'user' || user.permission === 'admin') {
+      return this.permittedUser();
+    } else {
+      return this.notPermittedUser();
+    }
+  }
+
+  permittedUser() {
     return(
       <Paper className={styles.root}>
         <h2>Add new post</h2>
@@ -204,6 +217,12 @@ class Component extends React.Component {
           </Button>
         </form>
       </Paper>
+    );
+  }
+
+  notPermittedUser() {
+    return (
+      <NotFound />
     );
   }
 }
