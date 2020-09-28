@@ -18,6 +18,7 @@ import Typography from '@material-ui/core/Typography';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import InputLabel from '@material-ui/core/InputLabel';
+import FormControl from '@material-ui/core/FormControl';
 
 import ImageUploader from 'react-images-upload';
 
@@ -196,16 +197,18 @@ class Component extends React.Component {
             onChange={this.handleChange}
             value={postData.email}
           />
-          <Select
-            id="status"
-            variant="outlined"
+          <TextField
+            id='status'
+            select
+            label='Status'
             value={postData.status}
             onChange={this.handleSelectChange}
+            variant='outlined'
             className={styles.formFieldPartialWidth}
           >
             <MenuItem value='active'>Active</MenuItem>
             <MenuItem value='closed'>Closed</MenuItem>
-          </Select>
+          </TextField>
           <ImageUploader
             withIcon={true}
             buttonText='Choose image'
