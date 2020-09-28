@@ -17,12 +17,11 @@ import CardActions from '@material-ui/core/CardActions';
 import Typography from '@material-ui/core/Typography';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
-
+import InputLabel from '@material-ui/core/InputLabel';
 
 import ImageUploader from 'react-images-upload';
 
 import {NavLink} from 'react-router-dom';
-import {NotFound} from '../NotFound/NotFound';
 
 class Component extends React.Component {
 
@@ -42,10 +41,6 @@ class Component extends React.Component {
     },
     loading: {
       error: false,
-    },
-    user: {
-      id: '2',
-      permission: 'user',
     },
   }
 
@@ -118,13 +113,8 @@ class Component extends React.Component {
 
   render() {
     const { post } = this.props;
-    const { user } = this.state;
 
-    if(post.userId === user.id || user.permission === 'admin') {
-      return post? this.postEdit() : this.noPost();
-    } else {
-      return this.notPermittedUser();
-    }
+    return post? this.postEdit() : this.noPost();
   }
 
   postEdit() {
@@ -208,9 +198,10 @@ class Component extends React.Component {
           />
           <Select
             id="status"
-            label="Status"
+            variant="outlined"
             value={postData.status}
             onChange={this.handleSelectChange}
+            className={styles.formFieldPartialWidth}
           >
             <MenuItem value='active'>Active</MenuItem>
             <MenuItem value='closed'>Closed</MenuItem>
@@ -275,12 +266,6 @@ class Component extends React.Component {
           </CardActions>
         </Card>
       </Paper>
-    );
-  }
-
-  notPermittedUser() {
-    return (
-      <NotFound />
     );
   }
 }
