@@ -12,7 +12,6 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import {NavLink} from 'react-router-dom';
-import {NotFound} from '../NotFound/NotFound';
 
 class Component extends React.Component {
 
@@ -21,22 +20,7 @@ class Component extends React.Component {
     user: PropTypes.object,
   }
 
-  state = {
-    id: '2',
-    permission: 'user',
-  }
-
   render() {
-    const {permission} = this.state;
-
-    if(permission === 'user' || permission === 'admin') {
-      return this.permittedUser();
-    } else {
-      return this.notPermittedUser();
-    }
-  }
-
-  permittedUser() {
     const {posts} = this.props;
 
     return(
@@ -88,12 +72,6 @@ class Component extends React.Component {
           </div>
         </div>
       </Paper>
-    );
-  }
-
-  notPermittedUser() {
-    return (
-      <NotFound />
     );
   }
 }
