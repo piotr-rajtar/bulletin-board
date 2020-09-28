@@ -8,18 +8,14 @@ import { createDate } from '../../../utils';
 import styles from './PostEdit.module.scss';
 
 import Paper from '@material-ui/core/Paper';
-import TextField from '@material-ui/core/TextField';
-import InputAdornment from '@material-ui/core/InputAdornment';
 import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
 import Typography from '@material-ui/core/Typography';
-import MenuItem from '@material-ui/core/MenuItem';
-
-import ImageUploader from 'react-images-upload';
 
 import {NavLink} from 'react-router-dom';
+import {Form} from '../../common/Form/Form';
 
 class Component extends React.Component {
 
@@ -121,121 +117,24 @@ class Component extends React.Component {
     return(
       <Paper className={styles.root}>
         <h2>Edit Post</h2>
-        <form
-          className={styles.form}
-          onSubmit={this.submitForm}>
-          <TextField
-            id="title"
-            label="Title"
-            variant="outlined"
-            InputProps={{
-              minLength: 10,
-            }}
-            required
-            fullWidth
-            className={styles.formFieldFullWidth}
-            onChange={this.handleChange}
-            value={postData.title}
-          />
-          <TextField
-            id="content"
-            label="Content"
-            multiline
-            variant="outlined"
-            InputProps={{
-              minLength: 20,
-            }}
-            required
-            fullWidth
-            className={styles.formFieldFullWidth}
-            onChange={this.handleChange}
-            value={postData.content}
-          />
-          <TextField
-            id="price"
-            label="Price"
-            variant="outlined"
-            type="number"
-            inputProps={{
-              min: 0,
-            }}
-            InputProps={{
-              startAdornment: <InputAdornment position="start">$</InputAdornment>,
-            }}
-            className={styles.formFieldPartialWidth}
-            onChange={this.handleChange}
-            value={postData.price}
-          />
-          <TextField
-            id="phone"
-            label="Phone number"
-            variant="outlined"
-            type="tel"
-            className={styles.formFieldPartialWidth}
-            onChange={this.handleChange}
-            value={postData.phone}
-          />
-          <TextField
-            id="location"
-            label="Location"
-            variant="outlined"
-            className={styles.formFieldPartialWidth}
-            onChange={this.handleChange}
-            value={postData.location}
-          />
-          <TextField
-            id="email"
-            label="Email"
-            variant="outlined"
-            type="email"
-            required
-            fullWidth
-            className={styles.formFieldFullWidth}
-            onChange={this.handleChange}
-            value={postData.email}
-          />
-          <TextField
-            id='status'
-            select
-            label='Status'
-            value={postData.status}
-            onChange={this.handleSelectChange}
-            variant='outlined'
-            className={styles.formFieldPartialWidth}
-          >
-            <MenuItem value='active'>Active</MenuItem>
-            <MenuItem value='closed'>Closed</MenuItem>
-          </TextField>
-          <ImageUploader
-            withIcon={true}
-            buttonText='Choose image'
-            imgExtension={['.jpg', '.gif', '.png', '.gif']}
-            maxFileSize={5242880}
-            withPreview={true}
-            onChange={this.setPhoto}
-            singleImage={true}
-          />
-          <Button
-            variant="outlined"
-            color="primary"
-            size="large"
-            className={styles.button}
-            type="submit"
-            onClick={this.setUpdateDate}
-          >
-            Edit
-          </Button>
-          <Button
-            variant="outlined"
-            color="primary"
-            size="large"
-            className={styles.button}
-            component={NavLink}
-            exact to={`/post/${postData.id}`}
-          >
-            Go back to the post
-          </Button>
-        </form>
+        <Form
+          postData={postData}
+          setPhoto={this.setPhoto}
+          setUpdateDate={this.setUpdateDate}
+          handleChange={this.handleChange}
+          handleSelectChange={this.handleSelectChange}
+          submitForm={this.submitForm}
+        />
+        <Button
+          variant="outlined"
+          color="primary"
+          size="large"
+          className={styles.button}
+          component={NavLink}
+          exact to={`/post/${postData.id}`}
+        >
+          Go back to the post
+        </Button>
       </Paper>
     );
   }

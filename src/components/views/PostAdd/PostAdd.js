@@ -8,13 +8,11 @@ import { createDate } from '../../../utils';
 import styles from './PostAdd.module.scss';
 
 import Paper from '@material-ui/core/Paper';
-import TextField from '@material-ui/core/TextField';
-import InputAdornment from '@material-ui/core/InputAdornment';
+
 import Button from '@material-ui/core/Button';
 
-import ImageUploader from 'react-images-upload';
-
 import {NavLink} from 'react-router-dom';
+import {Form} from '../../common/Form/Form';
 
 import { v4 as uuidv4 } from 'uuid';
 
@@ -104,109 +102,26 @@ class Component extends React.Component {
     return(
       <Paper className={styles.root}>
         <h2>Add new post</h2>
-        <form
-          className={styles.form}
-          onSubmit={this.submitForm}
+        <Form
+          setPhoto={this.setPhoto}
+          handleChange={this.handleChange}
+          submitForm={this.submitForm}
+          fillNoVisibleParameters={this.fillNoVisibleParameters}
+        />
+        <Button
+          variant="outlined"
+          color="primary"
+          size="large"
+          className={styles.button}
+          component={NavLink}
+          exact to={`/`}
         >
-          <TextField
-            id="title"
-            label="Title"
-            variant="outlined"
-            InputProps={{
-              minLength: 10,
-            }}
-            required
-            fullWidth
-            className={styles.formFieldFullWidth}
-            onChange={this.handleChange}
-          />
-          <TextField
-            id="content"
-            label="Content"
-            multiline
-            variant="outlined"
-            InputProps={{
-              minLength: 20,
-            }}
-            required
-            fullWidth
-            className={styles.formFieldFullWidth}
-            onChange={this.handleChange}
-          />
-          <TextField
-            id="price"
-            label="Price"
-            variant="outlined"
-            type="number"
-            inputProps={{
-              min: 0,
-            }}
-            InputProps={{
-              startAdornment: <InputAdornment position="start">$</InputAdornment>,
-            }}
-            className={styles.formFieldPartialWidth}
-            onChange={this.handleChange}
-          />
-          <TextField
-            id="phone"
-            label="Phone number"
-            variant="outlined"
-            type="tel"
-            className={styles.formFieldPartialWidth}
-            onChange={this.handleChange}
-          />
-          <TextField
-            id="location"
-            label="Location"
-            variant="outlined"
-            className={styles.formFieldPartialWidth}
-            onChange={this.handleChange}
-          />
-          <TextField
-            id="email"
-            label="Email"
-            variant="outlined"
-            type="email"
-            required
-            fullWidth
-            className={styles.formFieldFullWidth}
-            onChange={this.handleChange}
-          />
-          <ImageUploader
-            withIcon={true}
-            buttonText='Choose image'
-            imgExtension={['.jpg', '.gif', '.png', '.gif']}
-            maxFileSize={5242880}
-            withPreview={true}
-            onChange={this.setPhoto}
-            singleImage={true}
-          />
-          <Button
-            variant="outlined"
-            color="primary"
-            size="large"
-            className={styles.button}
-            type="submit"
-            onClick={this.fillNoVisibleParameters}
-          >
-            Submit
-          </Button>
-          <Button
-            variant="outlined"
-            color="primary"
-            size="large"
-            className={styles.button}
-            component={NavLink}
-            exact to={`/`}
-          >
               Go back to mainpage
-          </Button>
-        </form>
+        </Button>
       </Paper>
     );
   }
 }
-
 
 // const mapStateToProps = state => ({
 //   someProp: reduxSelector(state),
