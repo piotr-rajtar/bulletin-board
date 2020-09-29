@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { connect } from 'react-redux';
-import { getAllPosts } from '../../../redux/postsRedux';
+import { getAllPosts, getActivePostsRequest } from '../../../redux/postsRedux';
 
 import styles from './Homepage.module.scss';
 
@@ -17,15 +17,22 @@ class Component extends React.Component {
 
   static propTypes = {
     posts: PropTypes.array,
+    getActivePosts: PropTypes.func,
   }
 
   state = {
     permission: 'user',
   }
 
+  componentDidMount() {
+    const { getActivePosts } = this.props;
+    getActivePosts();
+  }
+
   render() {
     const {posts} = this.props;
     const {permission} = this.state;
+    console.log(posts);
 
     return(
       <Paper className={styles.root}>
@@ -37,7 +44,7 @@ class Component extends React.Component {
             {posts.map(post => (
               <Card
                 variant="outlined"
-                key={post.id}
+                key={post._id}
                 className={styles.card}
               >
                 <CardContent>{post.title}</CardContent>
@@ -48,7 +55,7 @@ class Component extends React.Component {
                     color="primary"
                     className={styles.button}
                     component={NavLink}
-                    exact to={`/post/${post.id}`}
+                    exact to={`/post/${post._id}`}
                   >
                     Find out more
                   </Button>
@@ -87,11 +94,11 @@ const mapStateToProps = state => ({
   posts: getAllPosts(state),
 });
 
-// const mapDispatchToProps = dispatch => ({
-//   someAction: arg => dispatch(reduxActionCreator(arg)),
-// });
+const mapDispatchToProps = dispatch => ({
+  getActivePosts: () => dispatch(getActivePostsRequest()),
+});
 
-const Container = connect(mapStateToProps)(Component);
+const Container = connect(mapStateToProps, mapDispatchToProps)(Component);
 
 export {
   //Component as Homepage,

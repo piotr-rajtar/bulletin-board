@@ -1,11 +1,15 @@
+import Axios from 'axios';
+
 /* selectors */
 export const getAllPosts = ({posts}) => (
-  posts.data.sort((date1,date2) => {
-    const dateA = new Date(date1.updated);
-    const dateB = new Date(date2.updated);
+  posts.data
+    .filter(post => post.status === 'active')
+    .sort((date1,date2) => {
+      const dateA = new Date(date1.updated);
+      const dateB = new Date(date2.updated);
 
-    return dateB.getTime() - dateA.getTime();
-  })
+      return dateB.getTime() - dateA.getTime();
+    })
 );
 
 export const getPostById = ({posts}, postId) => {
@@ -47,6 +51,22 @@ export const addPost = payload => ({ payload, type: ADD_POST });
 export const updatePost = payload => ({ payload, type: UPDATE_POST });
 
 /* thunk creators */
+
+export const getActivePostsRequest = () => {
+  return (dispatch, getState) => {
+    dispatch(fetchStarted());
+
+    Axios
+      .get('http://localhost:8000/api/posts')
+      .then(res => {
+        dispatch(fetchSuccess(res.data));
+        console.log(res.data);
+      })
+      .catch(err => {
+        dispatch(fetchError(err.message || true));
+      });
+  };
+};
 
 /* reducer */
 export const reducer = (statePart = [], action = {}) => {
