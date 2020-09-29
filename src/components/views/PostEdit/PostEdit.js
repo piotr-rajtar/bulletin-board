@@ -24,8 +24,8 @@ class Component extends React.Component {
       id: this.props.post.id,
       title: this.props.post.title,
       content: this.props.post.content,
-      publicationDate: this.props.post.publicationDate,
-      lastUpdate: this.props.post.lastUpdate,
+      created: this.props.post.created,
+      updated: this.props.post.updated,
       email: this.props.post.email,
       status: this.props.post.status,
       photo: this.props.post.photo,
@@ -61,7 +61,7 @@ class Component extends React.Component {
     this.setState({
       postData: {
         ...postData,
-        lastUpdate: date,
+        updated: date,
       },
     });
   }

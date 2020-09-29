@@ -47,7 +47,7 @@ class Component extends React.Component {
         >
           <CardHeader
             title={post.title}
-            subheader={`Publicated: ${post.publicationDate}, last updated: ${post.lastUpdate}`}
+            subheader={`Publicated: ${post.created}, last updated: ${post.updated}`}
           />
           <CardContent>
             <img className={styles.photo} src={post.photo} alt="User photography" />

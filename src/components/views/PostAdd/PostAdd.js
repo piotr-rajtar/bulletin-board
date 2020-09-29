@@ -23,8 +23,8 @@ class Component extends React.Component {
       id: '',
       title: '',
       content: '',
-      publicationDate: '',
-      lastUpdate: '',
+      created: '',
+      updated: '',
       email: '',
       status: '',
       photo: null,
@@ -62,8 +62,8 @@ class Component extends React.Component {
       postData: {
         ...postData,
         id: id,
-        publicationDate: date,
-        lastUpdate: date,
+        created: date,
+        updated: date,
         status: 'active',
       },
     });
