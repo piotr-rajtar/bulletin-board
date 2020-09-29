@@ -56,8 +56,6 @@ export const getActivePostsRequest = () => {
   return (dispatch, getState) => {
     const state = getState();
 
-    console.log('state', state);
-
     if(state.posts.data.length === 0 && state.posts.loading.active === false) {
 
       dispatch(fetchStarted());
@@ -66,7 +64,6 @@ export const getActivePostsRequest = () => {
         .get('http://localhost:8000/api/posts')
         .then(res => {
           dispatch(fetchSuccess(res.data));
-          console.log(res.data);
         })
         .catch(err => {
           dispatch(fetchError(err.message || true));

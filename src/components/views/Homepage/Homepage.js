@@ -32,7 +32,6 @@ class Component extends React.Component {
   render() {
     const {posts} = this.props;
     const {permission} = this.state;
-    console.log(posts);
 
     return(
       <Paper className={styles.root}>
