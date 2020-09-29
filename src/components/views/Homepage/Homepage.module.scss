@@ -8,12 +8,12 @@
 .cardContainer {
   display: flex;
   width: 100%;
-  justify-content: space-between;
+  justify-content: flex-start;
   flex-wrap: wrap;
 }
 
 .card {
-  margin: 10px 0;
+  margin: $universal-margin;
   width: 30%;
 }
 
