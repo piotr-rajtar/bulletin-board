@@ -19,10 +19,10 @@ router.get('/posts', async (req, res) => {
 
 router.get('/posts/:id', async (req, res) => {
   try {
-    const result = await Post
-      .findById(req.params.id);
-    if(!result) res.status(404).json({ post: 'Not found' });
-    else res.json(result);
+    const result = await Post;
+    const post = await result.findById(req.params.id);
+    if(!post) res.status(404).json({ post: 'Not found' });
+    else res.json(post);
   }
   catch(err) {
     res.status(500).json(err);

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { connect } from 'react-redux';
-import { getPostById } from '../../../redux/postsRedux.js';
+import { getPostById, getPostData } from '../../../redux/postsRedux.js';
 
 import styles from './Post.module.scss';
 
@@ -23,6 +23,7 @@ class Component extends React.Component {
 
   static propTypes = {
     post: PropTypes.object,
+    getPostData: PropTypes.func,
   }
 
   state = {
@@ -30,14 +31,22 @@ class Component extends React.Component {
     permission: 'user',
   }
 
+  async componentDidMount() {
+    const { getPostData } = this.props;
+
+    await getPostData();
+  }
+
   render() {
     const { post } = this.props;
+    console.log('w render poscik: ', post);
 
     return post? this.postTemplate() : this.noPost();
   }
 
   postTemplate() {
     const {post} = this.props;
+    console.log('w posttemplate poscik: ', post);
 
     return(
       <Paper className={styles.root}>
@@ -164,11 +173,11 @@ const mapStateToProps = (state, props) => ({
   post: getPostById(state, props.match.params.id),
 });
 
-const Container = connect(mapStateToProps)(Component);
+const mapDispatchToProps = (dispatch, props) => ({
+  getPostData: () => dispatch(getPostData(props.match.params.id)),
+});
 
-// const mapDispatchToProps = dispatch => ({
-//   someAction: arg => dispatch(reduxActionCreator(arg)),
-// });
+const Container = connect(mapStateToProps, mapDispatchToProps)(Component);
 
 export {
   //Component as Post,

@@ -13,10 +13,9 @@ export const getAllPosts = ({posts}) => (
 );
 
 export const getPostById = ({posts}, postId) => {
-
-  if(posts.data.length > 0) {
-    const postData = posts.data.filter(post => post.id === postId);
-    return postData[0];
+  console.log(typeof(posts.data));
+  if(posts.data) {
+    return posts.data;
   } else {
     return {};
   }
@@ -72,6 +71,23 @@ export const getActivePostsRequest = () => {
     } else {
       return;
     }
+  };
+};
+
+export const getPostData = (id) => {
+  return (dispatch) => {
+
+    dispatch(fetchStarted());
+
+    Axios
+      .get(`http://localhost:8000/api/posts/${id}`)
+      .then(res => {
+        dispatch(fetchSuccess(res.data));
+        console.log('res data: ', res.data);
+      })
+      .catch(err => {
+        dispatch(fetchError(err.message || true));
+      });
   };
 };
 
