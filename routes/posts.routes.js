@@ -41,17 +41,14 @@ router.post('/posts', async (req, res) => {
     //const { title, content, email } = req.fields;
     const file = req.files.photo;
 
-
-
-    const fileName = file.path.split('/').slice(-1)[0];
-
-    //console.log('filenaaaameeeeeeeee: ', fileName);
-
+    let fileName;
+    if(!file) fileName = null;
+    else fileName = file.path.split('/').slice(-1)[0];
 
     const newPost = new Post({ ...req.fields, photo: fileName  });
 
     await newPost.save();
-    //console.log('sfdsdfsdfsdfsd', newPost);
+    
     res.json(newPost);
   }
   catch(err) {

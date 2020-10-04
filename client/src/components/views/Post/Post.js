@@ -3,12 +3,14 @@ import PropTypes from 'prop-types';
 
 import { connect } from 'react-redux';
 import { getPostById, getPostData } from '../../../redux/postsRedux.js';
+import { IMAGES_URL } from '../../../config';
 
 import styles from './Post.module.scss';
 
 import Paper from '@material-ui/core/Paper';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
+import CardMedia from '@material-ui/core/CardMedia';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
@@ -56,8 +58,12 @@ class Component extends React.Component {
             title={post.title}
             subheader={`Publicated: ${post.created}, last updated: ${post.updated}`}
           />
+          <CardMedia
+            component='img'
+            image={post.photo? `${IMAGES_URL}/${post.photo}`: `${IMAGES_URL}/no_photo.jpg`}
+            className={styles.photo}
+          />
           <CardContent>
-            <img className={styles.photo} src={post.photo} alt="User photography" />
             <div className={styles.content_wrapper}>
               <p className={styles.content}>{post.content}</p>
             </div>

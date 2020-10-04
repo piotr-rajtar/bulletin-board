@@ -5,13 +5,16 @@
   text-align: center;
 }
 
-.button {
+.button, .table, .photo {
   margin: $universal-margin;
 }
 
-.table, .photo {
-  margin: $universal-margin;
+.table {
   width: 30%;
+}
+
+.photo {
+  width: 50%;
 }
 
 .content_wrapper {
