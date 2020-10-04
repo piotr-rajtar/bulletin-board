@@ -12,7 +12,7 @@ const app = express();
 /* MIDDLEWARE */
 app.use(cors());
 
-app.use(formidable({ uploadDir: '/public/uploads' }, [{
+app.use(formidable({ uploadDir: './public/uploads' }, [{
   event: 'fileBegin',
   action: (req, res, next, name, file) => {
     const fileName = uniqid() + '.' + file.name.split('.')[1];
@@ -32,10 +32,10 @@ app.use('/api', (req, res) => {
 });
 
 /* REACT WEBSITE */
-app.use(express.static(path.join(__dirname, '../public')));
-app.use(express.static(path.join(__dirname, '../build')));
+app.use(express.static(path.join(__dirname, '/public')));
+app.use(express.static(path.join(__dirname, '/client/build')));
 app.use('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../build/index.html'));
+  res.sendFile(path.join(__dirname, '/client/build/index.html'));
 });
 
 /* MONGOOSE */
