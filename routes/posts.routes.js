@@ -1,5 +1,8 @@
 const express = require('express');
 const router = express.Router();
+const textEscaper = require('../utils').textEscaper;
+const fileExtentionChecker = require('../utils').fileExtentionChecker;
+const lengthChecker = require('../utils').lengthChecker;
 
 const Post = require('../models/post.model');
 
@@ -38,18 +41,36 @@ router.get('/posts/:id', async (req, res) => {
 
 router.post('/posts', async (req, res) => {
   try{
-    //const { title, content, email } = req.fields;
+    const { title, content, email } = req.fields;
     const file = req.files.photo;
 
     let fileName;
     if(!file) fileName = null;
     else fileName = file.path.split('/').slice(-1)[0];
 
-    const newPost = new Post({ ...req.fields, photo: fileName  });
+    const isExtentionValid = fileExtentionChecker(fileName);
+    const titleLength = lengthChecker(title);
+    const contentLength = lengthChecker(content);
 
-    await newPost.save();
-    
-    res.json(newPost);
+    if(
+      title
+      && content
+      && email
+      && isExtentionValid
+      && titleLength >= 10
+      && contentLength >=20
+    ) {
+      const cleanTitle = textEscaper(title);
+      const cleanContent = textEscaper(content);
+      const cleanEmail = textEscaper(email);
+
+      const newPost = new Post({ ...req.fields, title: cleanTitle, content: cleanContent, email: cleanEmail,  photo: fileName  });
+      await newPost.save();
+      res.json(newPost);
+
+    } else {
+      throw new Error('Wrong input');
+    }
   }
   catch(err) {
     res.status(500).json(err);
