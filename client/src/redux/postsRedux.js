@@ -1,4 +1,5 @@
 import Axios from 'axios';
+import { API_URL } from '../config';
 
 /* selectors */
 export const getAllPosts = ({posts}) => {
@@ -56,7 +57,7 @@ export const getActivePostsRequest = () => {
     dispatch(fetchStarted());
 
     Axios
-      .get('http://localhost:8000/api/posts')
+      .get(`${API_URL}/posts`)
       .then(res => {
         dispatch(fetchSuccess(res.data));
       })
@@ -72,7 +73,7 @@ export const getPostData = (id) => {
     dispatch(fetchStarted());
 
     Axios
-      .get(`http://localhost:8000/api/posts/${id}`)
+      .get(`${API_URL}/posts/${id}`)
       .then(res => {
         dispatch(fetchSuccess(res.data));
       })
@@ -87,7 +88,7 @@ export const addPostData = (data) => {
 
     dispatch(fetchStarted());
     await Axios
-      .post('http://localhost:8000/api/posts',
+      .post(`${API_URL}/posts`,
         data,
         {
           headers: {
