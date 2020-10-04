@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { connect } from 'react-redux';
-import { addPost } from '../../../redux/postsRedux';
+import { addPostData } from '../../../redux/postsRedux';
 import { createDate } from '../../../utils';
 
 import styles from './PostAdd.module.scss';
@@ -14,13 +14,10 @@ import Button from '@material-ui/core/Button';
 import {NavLink} from 'react-router-dom';
 import {Form} from '../../common/Form/Form';
 
-import { v4 as uuidv4 } from 'uuid';
-
 class Component extends React.Component {
 
   state = {
     postData: {
-      id: '',
       title: '',
       content: '',
       created: '',
@@ -33,7 +30,7 @@ class Component extends React.Component {
       location: '',
     },
     loading: {
-      error: false,
+      error: null,
     },
   }
 
@@ -43,7 +40,7 @@ class Component extends React.Component {
 
   handleChange = (event) => {
     const { postData } = this.state;
-    const {value, id } = event.target;
+    const { value, id } = event.target;
 
     this.setState({
       postData: {
@@ -56,12 +53,10 @@ class Component extends React.Component {
   fillNoVisibleParameters = () => {
     const { postData } = this.state;
     const date = createDate();
-    const id = uuidv4();
 
     this.setState({
       postData: {
         ...postData,
-        id: id,
         created: date,
         updated: date,
         status: 'active',
@@ -87,13 +82,28 @@ class Component extends React.Component {
 
     let error = null;
 
-    if (!postData.title.length || !postData.content.length || !postData.email.length) error ='You cannot leave title, content and email firlds empty';
+    if (!postData.title.length || !postData.content.length || !postData.email.length) error ='You cannot leave title, content and email fields empty';
     else if(postData.title.length < 10 || postData.content.length < 20) error ='Too short, title cannot has less than 10 character, content less than 20';
 
+    //addPost(postData);
     if(!error) {
-      addPost(postData);
+      const formData = new FormData();
+
+      for(let key of ['title', 'content', 'created', 'updated', 'email', 'status', 'price', 'phone', 'location']) {
+        formData.append(key, postData[key]);
+      }
+
+      formData.append('photo', postData.photo);
+
+      addPost(formData);
       alert('Post added successfully');
-    } else {
+    }
+    else {
+      this.setState({
+        loading: {
+          error: error,
+        },
+      });
       alert(error);
     }
   }
@@ -128,7 +138,7 @@ class Component extends React.Component {
 // });
 
 const mapDispatchToProps = dispatch => ({
-  addPost: data => dispatch(addPost(data)),
+  addPost: data => dispatch(addPostData(data)),
 });
 
 const Container = connect(null, mapDispatchToProps)(Component);

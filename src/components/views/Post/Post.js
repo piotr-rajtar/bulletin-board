@@ -39,14 +39,12 @@ class Component extends React.Component {
 
   render() {
     const { post } = this.props;
-    console.log('w render poscik: ', post);
 
     return post? this.postTemplate() : this.noPost();
   }
 
   postTemplate() {
     const {post} = this.props;
-    console.log('w posttemplate poscik: ', post);
 
     return(
       <Paper className={styles.root}>

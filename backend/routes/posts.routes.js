@@ -9,8 +9,11 @@ router.get('/posts', async (req, res) => {
       .find({status: 'active'})
       .select('author created title photo status')
       .sort({created: -1});
+
     if(!result) res.status(404).json({ post: 'Not found' });
-    else res.json(result);
+    else {
+      res.json(result);
+    }
   }
   catch(err) {
     res.status(500).json(err);
@@ -19,10 +22,37 @@ router.get('/posts', async (req, res) => {
 
 router.get('/posts/:id', async (req, res) => {
   try {
-    const result = await Post;
-    const post = await result.findById(req.params.id);
-    if(!post) res.status(404).json({ post: 'Not found' });
-    else res.json(post);
+    const result = await Post.findById(req.params.id);
+    const arrayResult = [];
+
+    if(!result) res.status(404).json({ post: 'Not found' });
+    else {
+      arrayResult.push(result);
+      res.json(arrayResult);
+    }
+  }
+  catch(err) {
+    res.status(500).json(err);
+  }
+});
+
+router.post('/posts', async (req, res) => {
+  try{
+    //const { title, content, email } = req.fields;
+    const file = req.files.photo;
+
+
+
+    const fileName = file.path.split('/').slice(-1)[0];
+
+    //console.log('filenaaaameeeeeeeee: ', fileName);
+
+
+    const newPost = new Post({ ...req.fields, photo: fileName  });
+
+    await newPost.save();
+    //console.log('sfdsdfsdfsdfsd', newPost);
+    res.json(newPost);
   }
   catch(err) {
     res.status(500).json(err);
